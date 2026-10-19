@@ -1,0 +1,22 @@
+# El almacén local: se regenera reenviando los sobres.
+datos/
+logs/
+
+# Go
+/backend/api
+/backend/vigia
+
+# Next
+node_modules/
+.next/
+out/
+next-env.d.ts
+
+# Terraform: el tfstate tiene nombres de recursos y hay que tratarlo como sensible.
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+!terraform.tfvars.example
+
+.env

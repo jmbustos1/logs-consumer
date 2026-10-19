@@ -1,0 +1,136 @@
+/* Paleta AETERN. La fuente de verdad es brand/firma-aetern.html del proyecto de la landing:
+   un acento, tinta profunda, superficies claras y hairlines. Nada más. */
+:root {
+  --acento: #3f6fb4;
+  --acento-suave: #eaf0f8;
+  --tinta: #0f1320;
+  --texto: #2a2a2a;
+  --suave: #6b7280;
+  --fondo: #eef1f5;
+  --superficie: #ffffff;
+  --borde: #dde3ea;
+  --divisor: #c8d0da;
+  --consola: #f3f5f8;
+
+  /* La marca no define colores de estado. Estos salen de rotar el tono del azul de marca
+     manteniendo su saturación, para que convivan con él en vez de pelearse. */
+  --ok: #2f7d5d;
+  --sin-novedad: #6b7280;
+  --error: #b4453f;
+  --silencio: #b4863f;
+
+  --sans: Inter, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "Fira Code", "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--acento); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.envoltorio { max-width: 1080px; margin: 0 auto; padding: 28px 20px 64px; }
+
+/* ── cabecera de marca ───────────────────────────────────────────────────── */
+.marca { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+.marca .glifo {
+  font-size: 30px; line-height: 1; color: var(--acento); font-weight: 700;
+  padding-right: 14px; border-right: 2px solid var(--acento);
+}
+.marca .nombre { font-size: 15px; font-weight: 700; letter-spacing: 3px; color: var(--tinta); }
+.marca .bajada {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--acento);
+  margin-top: 2px;
+}
+.marca nav { margin-left: auto; display: flex; gap: 18px; font-size: 12px;
+  letter-spacing: 1.5px; text-transform: uppercase; }
+
+/* ── superficies ─────────────────────────────────────────────────────────── */
+.tarjeta {
+  background: var(--superficie); border: 1px solid var(--borde); border-radius: 10px;
+  padding: 18px 20px; margin-bottom: 14px;
+}
+.tarjeta.clickable:hover { border-color: var(--acento); }
+
+h1 { font-size: 18px; color: var(--tinta); margin: 0 0 4px; }
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--suave);
+     margin: 30px 0 12px; font-weight: 600; }
+
+.mono { font-family: var(--mono); font-size: 12.5px; }
+.tenue { color: var(--suave); }
+.hairline { border: 0; border-top: 1px solid var(--borde); margin: 14px 0; }
+
+/* ── estados ─────────────────────────────────────────────────────────────── */
+.estado { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono);
+  font-size: 11.5px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+.estado::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.estado-ok { color: var(--ok); }
+.estado-sin_novedad { color: var(--sin-novedad); }
+.estado-error { color: var(--error); }
+.estado-en_silencio { color: var(--silencio); }
+.estado-desconocido { color: var(--suave); }
+
+/* ── etapas ──────────────────────────────────────────────────────────────── */
+.etapa { border-top: 1px solid var(--borde); padding: 9px 0; }
+.etapa:first-child { border-top: 0; }
+.etapa-cab { display: grid; grid-template-columns: 16px 1fr 92px 150px; gap: 12px;
+  align-items: center; cursor: pointer; user-select: none; }
+.etapa-cab .flecha { color: var(--suave); font-size: 10px; }
+.etapa-nombre { font-family: var(--mono); font-size: 13px; color: var(--tinta); }
+.etapa-ms { font-family: var(--mono); font-size: 12px; color: var(--suave); text-align: right; }
+.barra { height: 6px; background: var(--acento-suave); border-radius: 3px; overflow: hidden; }
+.barra > i { display: block; height: 100%; background: var(--acento); }
+.barra.falla > i { background: var(--error); }
+
+.etapa-cuerpo { padding: 8px 0 4px 28px; }
+.evento { display: flex; gap: 10px; padding: 3px 0; font-family: var(--mono); font-size: 12px;
+  border-top: 1px dotted var(--borde); }
+.evento .hora { color: var(--suave); }
+.evento .nombre { color: var(--tinta); min-width: 170px; }
+.evento .campos { color: var(--suave); word-break: break-word; }
+.nivel-warn .nombre { color: var(--silencio); }
+.nivel-error .nombre { color: var(--error); }
+
+.consola {
+  background: var(--consola); border: 1px solid var(--borde); border-radius: 6px;
+  padding: 10px 12px; margin: 8px 0 4px; font-family: var(--mono); font-size: 12px;
+  max-height: 320px; overflow: auto; white-space: pre-wrap; color: var(--texto);
+}
+.error-caja { background: #fdf2f1; border: 1px solid #f0d5d3; border-radius: 6px;
+  padding: 10px 12px; margin-top: 8px; font-family: var(--mono); font-size: 12px; color: var(--error); }
+
+/* ── controles ───────────────────────────────────────────────────────────── */
+.controles { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 16px 0; }
+button, .boton {
+  font-family: var(--sans); font-size: 12px; letter-spacing: 0.5px;
+  background: var(--superficie); color: var(--texto);
+  border: 1px solid var(--borde); border-radius: 6px; padding: 6px 12px; cursor: pointer;
+}
+button:hover { border-color: var(--acento); color: var(--acento); }
+button.activo { background: var(--acento); border-color: var(--acento); color: #fff; }
+button.principal { background: var(--acento); border-color: var(--acento); color: #fff; }
+button.principal:hover { opacity: 0.9; color: #fff; }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── tablas ──────────────────────────────────────────────────────────────── */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--suave); font-weight: 600; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--borde); }
+td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--borde); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+
+.contadores { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--mono); font-size: 12px; }
+.contadores b { color: var(--tinta); font-weight: 600; }
+
+.aviso { background: #fffaf0; border: 1px solid #f0e2c8; color: #8a6d3b;
+  border-radius: 8px; padding: 12px 14px; font-size: 13px; margin-bottom: 14px; }
+.vacio { color: var(--suave); font-style: italic; padding: 18px 0; }

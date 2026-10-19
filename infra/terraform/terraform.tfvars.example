@@ -1,0 +1,20 @@
+# cp terraform.tfvars.example terraform.tfvars y completar.
+
+# Lo único obligatorio: adónde van las alertas de presupuesto.
+email_alertas = "tu@correo.cl"
+
+# Los nombres de bucket se derivan solos de tu id de cuenta AWS
+# (<proyecto>-datos-<cuenta> y <proyecto>-panel-<cuenta>), así que no hace falta escribirlos
+# ni dejar el id en ningún archivo. Si querés otros nombres, descomentá:
+# bucket_datos = "mi-bucket-de-datos"
+# bucket_web   = "mi-bucket-del-panel"
+
+# aws_profile = "personal"
+# aws_region  = "us-east-1"
+
+# Dominio propio (opcional). Si lo definís, el certificado ACM tiene que estar en us-east-1.
+# dominio_panel   = "pipelines.aetern.dev"
+# certificado_arn = "arn:aws:acm:us-east-1:...:certificate/..."
+
+# El diagnóstico asistido viene apagado. Para encenderlo: "on" acá, y cargar la llave en SSM.
+# diagnostico = "on"

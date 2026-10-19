@@ -1,0 +1,41 @@
+# Levantar todo en local:  docker compose up --build
+#
+# No hay base de datos que arrancar: el almacén es un árbol de archivos, y en AWS ese mismo
+# árbol son prefijos de S3. Un servicio menos que mantener y `ls -R datos/` como herramienta
+# de depuración.
+services:
+  api:
+    build: ./backend
+    container_name: lc-api
+    ports:
+      - "8787:8080"
+    environment:
+      - LC_ENTORNO=local
+      - LC_DATOS=/datos
+      - LC_CORS=http://localhost:3000
+      # Sin tokens las rutas quedan abiertas y el arranque lo avisa. Definilos antes de
+      # exponer esto a cualquier red que no sea la tuya.
+      - LC_TOKEN_EMISOR=${LC_TOKEN_EMISOR:-}
+      - LC_TOKEN_LECTOR=${LC_TOKEN_LECTOR:-}
+      # El diagnóstico asistido viene apagado. on + ANTHROPIC_API_KEY para encenderlo.
+      - LC_DIAGNOSTICO=${LC_DIAGNOSTICO:-off}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - LC_MODELO=${LC_MODELO:-claude-opus-5}
+    volumes:
+      - datos:/datos
+    restart: unless-stopped
+
+  panel:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8787/api/v1
+    container_name: lc-panel
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  datos:
