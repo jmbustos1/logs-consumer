@@ -127,4 +127,4 @@ que no hace falta configurarlo.
 - Los **tres clientes**: Python (los ETL reales), Go y bash, cada uno emitiendo el mismo
   contrato.
 - La API **dentro del contenedor**, y la imagen de Lambda construida.
-- `pruebas.sh`: 28 criterios en verde.
+- `pruebas.sh`: 34 criterios en verde.
